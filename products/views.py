@@ -1,7 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.viewsets import ReadOnlyModelViewSet
-
+from .filters import ProductFilter
 from .models import Product
 from .serializers import ProductDetailSerializer, ProductListSerializer
 
@@ -15,10 +15,7 @@ class ProductViewSet(ReadOnlyModelViewSet):
         SearchFilter,
         OrderingFilter,
     ]
-    filterset_fields = {
-        "category__slug": ["exact"],
-        "brand__slug": ["exact"],
-    }
+    filterset_class = ProductFilter
     search_fields = ["name", "description", "category__name", "brand__name"]
     ordering_fields = ["price", "created_at", "name"]
     ordering = ["-created_at"]
