@@ -25,7 +25,11 @@ class BrandViewSet(ReadOnlyModelViewSet):
 
 
 class ProductViewSet(ReadOnlyModelViewSet):
-    queryset = Product.objects.filter(is_active=True)
+    queryset = (
+        Product.objects.filter(is_active=True)
+        .select_related("category", "brand")
+        .prefetch_related("images")
+    )
     lookup_field = "slug"
 
     filter_backends = [
