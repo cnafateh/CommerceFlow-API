@@ -1,11 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.viewsets import ReadOnlyModelViewSet
-from .filters import ProductFilter
-from .models import Product
-from .serializers import ProductDetailSerializer, ProductListSerializer
-
-from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from .filters import ProductFilter
 from .models import Brand, Category, Product
@@ -15,6 +10,7 @@ from .serializers import (
     ProductDetailSerializer,
     ProductListSerializer,
 )
+
 
 class CategoryViewSet(ReadOnlyModelViewSet):
     queryset = Category.objects.filter(is_active=True)
@@ -26,6 +22,8 @@ class BrandViewSet(ReadOnlyModelViewSet):
     queryset = Brand.objects.filter(is_active=True)
     serializer_class = BrandSerializer
     lookup_field = "slug"
+
+
 class ProductViewSet(ReadOnlyModelViewSet):
     queryset = Product.objects.filter(is_active=True)
     lookup_field = "slug"
