@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     # Third-party apps
     'rest_framework',
     'django_filters',
+    'drf_spectacular',
 
     # Local apps
     'accounts',
@@ -133,6 +134,13 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Django Commerce API",
+    "DESCRIPTION": "Enterprise-grade E-commerce REST API built with Django and DRF.",
+    "VERSION": "1.0.0",
 }
 
 AUTH_USER_MODEL = 'accounts.User'
@@ -159,3 +167,4 @@ CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TIMEZONE = "Asia/Baku"
+
