@@ -6,7 +6,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from orders.models import Order, OrderStatus
-from orders.tasks import send_order_confirmation_email
 
 from .models import Payment, PaymentStatus
 
@@ -36,8 +35,6 @@ class PaymentAPIView(APIView):
 
         order.status = OrderStatus.PAID
         order.save(update_fields=["status"])
-
-        send_order_confirmation_email.delay(order.id)
 
         return Response(
             {
